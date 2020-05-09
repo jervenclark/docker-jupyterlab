@@ -4,3 +4,4 @@ nodejs=10.19.0~dfsg1-1
 texlive-fonts-recommended=2018.20190227-2
 texlive-generic-recommended=2018.20190227-2
 texlive-xetex=2018.20190227-2
+pandoc=2.2.1-3+b2
