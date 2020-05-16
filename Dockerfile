@@ -15,6 +15,7 @@ COPY ./build/requirements.txt /requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r /requirements.txt \
     && jupyter contrib nbextension install \
     && python -m bash_kernel.install
+    && python -m markdown_kernel.install
 
 # Setup Jupyter Lab Extensions
 COPY ./build/.jupyter /root/.jupyter
