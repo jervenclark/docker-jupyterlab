@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:experimental
-FROM python:3-slim
+FROM python:3.8.3-slim
 
 MAINTAINER Jerven Clark Chua <jervenclark.chua@gmail.com>
 
@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=/var/cache/apt apt-get update \
 COPY ./build/requirements.txt /requirements.txt
 RUN --mount=type=cache,target=/root/.cache/pip pip install -r /requirements.txt \
     && jupyter contrib nbextension install \
-    && python -m bash_kernel.install
+    && python -m bash_kernel.install \
     && python -m markdown_kernel.install
 
 # Setup Jupyter Lab Extensions
