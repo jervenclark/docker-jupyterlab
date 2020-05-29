@@ -23,21 +23,21 @@ ENV COMMIT "$COMMIT"
 ENV VERSION "$VERSION"
 
 # Install Apt packages
-COPY ./build/pkglist /pkglist
+COPY ../build/pkglist /pkglist
 RUN apt-get update \
   && xargs apt-get -y install < /pkglist \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
 # Install PIP modules
-COPY ./build/requirements.txt /requirements.txt
+COPY ../build/requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt \
   && jupyter contrib nbextension install \
   && python -m bash_kernel.install \
   && python -m markdown_kernel.install
 
 # Setup Jupyter Lab Extensions
-COPY ./build/.jupyter /root/.jupyter
+COPY ../build/.jupyter /root/.jupyter
 RUN /usr/local/bin/jupyter labextension install \
   @ijmbarr/jupyterlab_spellchecker \
   @jupyterlab/git \
@@ -48,7 +48,7 @@ RUN /usr/local/bin/jupyter labextension install \
 RUN npm cache clean --force \
   && rm -rf /usr/local/share/jupyter/lab/staging
 
-COPY ./build/nbconfig /usr/local/etc/jupyter/nbconfig
+COPY ../build/nbconfig /usr/local/etc/jupyter/nbconfig
 
 # Set container specific configs
 EXPOSE 8888
