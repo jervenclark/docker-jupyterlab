@@ -10,5 +10,5 @@ DOCKER_BUILDKIT=1 docker build -t jupyterlab .
 
 ## Usage
 ```sh
-docker run -dv $PWD:/notebooks jervenclark/jupyterlab:latest
+docker run -dv $PWD:/notebooks -p 8888:8888 jervenclark/jupyterlab:latest
 ```
