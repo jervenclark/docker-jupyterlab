@@ -24,7 +24,7 @@ ENV VERSION "$VERSION"
 
 # Install Apt packages
 COPY ./build/pkglist /pkglist
-RUN --mount=type=cache,target=/var/cache/apt apt-get update \
+apt-get update \
     && xargs apt-get -y install < /pkglist \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -38,7 +38,7 @@ RUN --mount=type=cache,target=/root/.cache/pip pip install -r /requirements.txt 
 
 # Setup Jupyter Lab Extensions
 COPY ./build/.jupyter /root/.jupyter
-RUN --mount=type=cache,target=/usr/local/share/jupyter/lab/staging /usr/local/bin/jupyter labextension install \
+/usr/local/bin/jupyter labextension install \
     @ijmbarr/jupyterlab_spellchecker \
     @jupyterlab/git \
     @jupyterlab/toc \
