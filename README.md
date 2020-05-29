@@ -1,6 +1,20 @@
 # Jupyter Lab Docker Container
 
-## Build
+![build](https://img.shields.io/docker/cloud/build/jervenclark/jupyterlab) ![automated](https://img.shields.io/docker/cloud/automated/jervenclark/jupyterlab)
+
+Complete Jupyter environment setup. Software versions:
+
+- jupyter core     : 4.6.1
+- jupyter-notebook : 6.0.3
+- qtconsole        : 4.7.4
+- ipython          : 7.14.0
+- ipykernel        : 5.3.0
+- jupyter client   : 5.3.4
+- jupyter lab      : 1.2.6
+- nbconvert        : 5.6.1
+- ipywidgets       : 7.5.1
+- nbformat         : 5.0.6
+- traitlets        : 4.3.3
 
 This uses experimental syntax, to build it declare a `BUILDKIT` env variable:
 
@@ -10,5 +24,9 @@ DOCKER_BUILDKIT=1 docker build -t jupyterlab .
 
 ## Usage
 ```sh
-docker run -dv $PWD:/notebooks -p 8888:8888 jervenclark/jupyterlab:latest
+docker run -dit --rm  \
+    --name jupyterlab \
+    -v $PWD/workspace:/home/developer/workspace \
+    -p 8888:8888 \
+    jervenclark/jupyterlab:latest
 ```

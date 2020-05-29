@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Remove docker buildkit
+echo 'Strip buildkit flags'
+sed -E 's/RUN --(\w|=|,|\/|\.)+\s/RUN /;' \
+    Dockerfile > Dockerfile.hub
+git add Dockerfile.hub
+exit
