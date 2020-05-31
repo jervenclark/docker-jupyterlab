@@ -29,16 +29,23 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+# Setup new user
+RUN useradd -ms /bin/bash developer
+ENV PATH  "$PATH:/home/developer/.local/bin"
+
 # Install PIP modules
 COPY ./build/requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt \
-  && jupyter contrib nbextension install \
+RUN pip install \
+  -r /requirements.txt
+RUN /usr/local/bin/jupyter contrib nbextension install \
   && python -m bash_kernel.install \
   && python -m markdown_kernel.install
 
 # Setup Jupyter Lab Extensions
-COPY ./build/.jupyter /root/.jupyter
-RUN /usr/local/bin/jupyter labextension install \
+COPY ./build/.jupyter /home/developer/.jupyter
+RUN chown -R developer /home/developer/.jupyter
+RUN /usr/local/bin/jupyter \
+  labextension install \
   @ijmbarr/jupyterlab_spellchecker \
   @jupyterlab/git \
   @jupyterlab/toc \
@@ -47,12 +54,14 @@ RUN /usr/local/bin/jupyter labextension install \
 
 RUN npm cache clean --force \
   && rm -rf /usr/local/share/jupyter/lab/staging
-
 COPY ./build/nbconfig /usr/local/etc/jupyter/nbconfig
+
+# Setup workspace
+USER developer
+RUN mkdir /home/developer/workspace
+RUN chown developer /home/developer/workspace
+WORKDIR /home/developer/workspace
 
 # Set container specific configs
 EXPOSE 8888
-WORKDIR /notebooks
-
 CMD ["jupyter-lab", "--ip='0.0.0.0'", "--port=8888", "--no-browser", "--allow-root"]
-

@@ -1,6 +1,6 @@
 # Jupyter Lab Docker Container
 
-![build](https://img.shields.io/docker/cloud/build/jervenclark/jupyterlab) ![automated](https://img.shields.io/docker/cloud/automated/jervenclark/jupyterlab)
+![build](https://img.shields.io/docker/cloud/build/jervenclark/jupyterlab) ![automated](https://img.shields.io/docker/cloud/automated/jervenclark/jupyterlab)![size](https://img.shields.io/docker/image-size/jervenclark/jupyterlab?style=flat-square) ![code size](https://img.shields.io/github/languages/code-size/jervenclark/docker-jupyterlab?style=flat-square)
 
 Complete Jupyter environment setup. Software versions:
 
