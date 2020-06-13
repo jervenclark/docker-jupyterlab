@@ -20,6 +20,7 @@ numpy==1.16.3
 pandas==0.24.2
 pandoc==1.0.2
 python-language-server[all]
+qgrid
 regex==2020.5.14
 scipy==1.4.1
 seaborn==0.10.0

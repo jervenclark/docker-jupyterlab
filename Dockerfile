@@ -47,10 +47,14 @@ RUN chown -R developer /home/developer/.jupyter
 RUN --mount=type=cache,target=/usr/local/share/jupyter/lab/staging /usr/local/bin/jupyter \
   labextension install \
   @ijmbarr/jupyterlab_spellchecker \
-  @jupyterlab/git \
   @jupyterlab/toc \
   @krassowski/jupyterlab-lsp@0.8.0 \
-  jupyterlab-drawio
+  jupyterlab-drawio \
+  @jupyter-widgets/jupyterlab-manager \
+  qgrid2
+
+RUN /usr/local/bin/jupyter \
+  nbextension enable --py --sys-prefix widgetsnbextension
 
 RUN npm cache clean --force \
   && rm -rf /usr/local/share/jupyter/lab/staging

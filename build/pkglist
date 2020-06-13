@@ -1,4 +1,5 @@
 build-essential=12.6
+git
 npm
 nodejs=10.19.0~dfsg1-1
 texlive-fonts-recommended=2018.20190227-2
